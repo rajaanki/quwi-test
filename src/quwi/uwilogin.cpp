@@ -14,9 +14,6 @@ UwiLogin::UwiLogin(QDialog *parent) :
     ui->labelInfo->hide();
     ui->labelInfo->setStyleSheet("QLabel { color : red; }");
 
-    ui->lineEditUserName->setText("vitaliibondtest@gmail.com");
-    ui->lineEditPassword->setText("vitaliibondtest");
-
     QObject::connect(ui->buttonLogin, &QPushButton::clicked, this, [=] () {
         ui->labelInfo->clear();
         ui->labelInfo->setStyleSheet("QLabel { color : green; }");

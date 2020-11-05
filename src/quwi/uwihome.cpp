@@ -116,16 +116,7 @@ UwiHome::UwiHome(QWidget *parent) :
 
     QObject::connect(ui->buttonOK, &QPushButton::clicked, this, [=] () {
 
-        //remove items from users grid
-        QLayoutItem *child;
-        while ((child = ui->gridLayout->takeAt(0)) != 0) {
-            if (child->widget())
-                child->widget()->setParent(NULL);
-
-            delete child;
-        }
-
-        projectEditItem->name = ui->lineEditName->text();
+       projectEditItem->name = ui->lineEditName->text();
 
         //handlle sending edit request to server
         QString serviceLink = QString(SERVICE_BASE_URL) + QString(SERVICE_PROJECT_PROPERTY_CHANGE) + QString("?id=") + QString::number(projectEditItem->id);
@@ -460,6 +451,16 @@ void UwiHome::projectEditNameResponse(QNetworkReply* reply){
             projectsList.clear();
             delete projects;
             getAllProjects();
+
+            //remove items from users grid
+            QLayoutItem *child;
+            while ((child = ui->gridLayout->takeAt(0)) != 0) {
+                if (child->widget())
+                    child->widget()->setParent(NULL);
+
+                delete child;
+            }
+
             ui->stackedWidget->setCurrentIndex(0);
         } else {
             //handle error condition
