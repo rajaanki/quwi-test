@@ -103,6 +103,7 @@ void UwiLogin::loginResponse(QNetworkReply* reply){
             loggedIn = true;
 
             ui->labelInfo->hide();
+            ui->lineEditPassword->clear();
             emit login(true);
             close();
         }else{
